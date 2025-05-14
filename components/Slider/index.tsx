@@ -318,10 +318,10 @@ const Slider: React.FC = () => {
 
                     <div className="navigation-buttons">
                         <button onClick={handlePrev}>
-                            <img src="/icons/left.svg" alt="arrow-left"/>
+                            <img src={`${import.meta.env.BASE_URL}icons/left.svg`} alt="arrow-left"/>
                         </button>
                         <button onClick={handleNext}>
-                            <img src="/icons/right.svg" alt="arrow-right"/>
+                            <img src={`${import.meta.env.BASE_URL}icons/right.svg`} alt="arrow-right"/>
                         </button>
                     </div>
 

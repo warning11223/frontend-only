@@ -55,11 +55,12 @@ const BottomCarousel: React.FC<Props> = ({isAnimating, slides, width}) => {
             {!isAnimating && (
                 <>
                     <div className="swiper-button-prev custom-prev-button">
-                        <img src="/icons/left.svg" alt="arrow-left"/>
+                        <img src={`${import.meta.env.BASE_URL}icons/left.svg`} alt="arrow-left"/>
                     </div>
                     <div className="swiper-button-next custom-next-button">
-                        <img src="/icons/right.svg" alt="arrow-right"/>
+                        <img src={`${import.meta.env.BASE_URL}icons/right.svg`} alt="arrow-right"/>
                     </div>
+
 
                     {width <= 768 && (
                         <p className="circle-with-number-desc mobile">Наука</p>
