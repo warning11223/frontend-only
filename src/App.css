@@ -1,0 +1,50 @@
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'PT Sans', sans-serif;
+  /*background: rgb(255, 255, 255);*/
+}
+
+.container {
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 170px;
+  margin: 0 auto;
+
+  height: 100vh;
+  max-width: 1440px;
+  border-left: 1px solid #42567A;
+  border-right: 1px solid #42567A;
+
+  @media (max-width: 1600px) {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  @media (max-width: 1440px) {
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 80px;
+  }
+
+  @media (max-width: 960px) {
+    border: none;
+  }
+
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-top: 59px;
+
+  }
+}
+
+.swiper-slide {
+  cursor: pointer;
+}
