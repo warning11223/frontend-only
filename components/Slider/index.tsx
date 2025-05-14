@@ -1,7 +1,7 @@
 import 'swiper/css';
 import gsap from 'gsap';
-import "../../styles/Slider.scss";
 import BottomCarousel from "../BottomCarousel";
+import styles from  "../../styles/Slider.module.scss";
 import React, {useRef, useState, useEffect} from 'react';
 import {slidesByOption} from "../../src/models/slides.ts";
 import {useWindowWidth} from "../../utils/useWindowWidth.ts";
@@ -233,11 +233,15 @@ const Slider: React.FC = () => {
     };
 
     const handlePrev = () => {
+        if (selectedSlideIndex === 0) return;
+
         if (isAnimating) return;
         rotateCounterClockwise(1);
     };
 
     const handleNext = () => {
+        if (selectedSlideIndex === 5) return;
+
         if (isAnimating) return;
         rotateClockwise(1);
     };
@@ -246,21 +250,21 @@ const Slider: React.FC = () => {
     const pointRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     return (
-        <div className="slider-wrapper">
-            <div className="timeline-slider-container">
-                <div className="slider-title">
+        <div className={styles.sliderWrapper}>
+            <div className={styles.timelineSliderContainer}>
+                <div className={styles.sliderTitle}>
                     <p>Исторические <br/> даты</p>
                 </div>
 
-                <div className="circle-container">
-                    <div className="active-years">
-                        <p ref={leftNumberRef} className="left-number">{firstYear}</p>
-                        <p ref={rightNumberRef} className="right-number">{lastYear}</p>
+                <div className={styles.circleContainer}>
+                    <div className={styles.activeYears}>
+                        <p ref={leftNumberRef} className={styles.leftNumber}>{firstYear}</p>
+                        <p ref={rightNumberRef} className={styles.rightNumber}>{lastYear}</p>
                     </div>
 
                     <div
                         ref={circleRef}
-                        className="timeline-circle"
+                        className={styles.timelineCircle}
                     >
                         {pointsCoordinates.map((coords, index) => {
                             const isActive = index === selectedSlideIndex;
@@ -272,25 +276,20 @@ const Slider: React.FC = () => {
                                         pointsRef.current[index] = el;
                                         pointRefs.current[index] = el;
                                     }}
-                                    className={isActive ? 'active-point' : 'circle-point'}
+                                    className={`${isActive ? styles.activePoint : styles.circlePoint} ${styles.defaultPoint}`}
                                     style={{
-                                        cursor: 'pointer',
-                                        position: 'absolute',
                                         left: coords.left,
                                         top: coords.top,
-                                        transform: 'translate(-50%, -50%)',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
                                     }}
                                     onClick={() => handlePointClick(index)}
                                     onMouseEnter={() => setHoveredPoint(index)}
                                     onMouseLeave={() => setHoveredPoint(null)}
                                 >
                                     {(isActive || hoveredPoint === index) && (
-                                        <div className={isActive ? "circle-with-number" : "circle-with-number-hover"}>
+                                        <div
+                                            className={`${isActive ? styles.circleWithNumber : styles.circleWithNumberHover}`}>
                                             {isActive && !isAnimating && (
-                                                <p className="circle-with-number-desc">Наука</p>
+                                                <p className={styles.circleWithNumberDesc}>Наука</p>
                                             )}
                                             {index + 1}
                                         </div>
@@ -300,36 +299,42 @@ const Slider: React.FC = () => {
                         })}
                     </div>
 
-                    <div className="center-line horizontal-line"></div>
-                    <div className="center-line vertical-line"></div>
+                    <div className={`${styles.centerLine} ${styles.horizontalLine}`}></div>
+                    <div className={`${styles.centerLine} ${styles.verticalLine}`}></div>
                 </div>
 
-                <div className="navigation-buttons-wrapper">
-                    <div className="mobile-carousel">
+                <div className={styles.navigationButtonsWrapper}>
+                    <div className={styles.mobileCarousel}>
                         <BottomCarousel
                             isAnimating={isAnimating}
                             slides={slides}
                             width={width}
                         />
                     </div>
-                    <p className="amount">
+                    <p className={styles.amount}>
                         {`0${selectedSlideIndex + 1}/06`}
                     </p>
 
-                    <div className="navigation-buttons">
-                        <button onClick={handlePrev}>
+                    <div className={styles.navigationButtons}>
+                        <button
+                            onClick={handlePrev}
+                            className={selectedSlideIndex === 0 ? styles.disabledButton : ""}
+                        >
                             <img src={`${import.meta.env.BASE_URL}icons/left.svg`} alt="arrow-left"/>
                         </button>
-                        <button onClick={handleNext}>
+                        <button
+                            onClick={handleNext}
+                            className={selectedSlideIndex === 5 ? styles.disabledButton : ""}
+                        >
                             <img src={`${import.meta.env.BASE_URL}icons/right.svg`} alt="arrow-right"/>
                         </button>
                     </div>
 
-                    <div className="slider-pagination">
+                    <div className={styles.sliderPagination}>
                         {pointsCoordinates.map((_, index) => (
                             <div
                                 key={index}
-                                className={`pagination-dot ${index === selectedSlideIndex ? 'active' : ''}`}
+                                className={`${styles.paginationDot} ${index === selectedSlideIndex ? styles.active : ''}`}
                                 onClick={() => handlePointClick(index)}
                             />
                         ))}
@@ -337,7 +342,7 @@ const Slider: React.FC = () => {
                 </div>
             </div>
 
-            <div className="pc-carousel">
+            <div className={styles.pcСarousel}>
                 <BottomCarousel
                     isAnimating={isAnimating}
                     slides={slides}

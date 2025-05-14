@@ -1,4 +1,4 @@
-.slider-wrapper {
+.sliderWrapper {
   @media (max-width: 1440px) {
     padding-left: 40px;
     padding-right: 40px;
@@ -10,11 +10,9 @@
   }
 }
 
-.timeline-slider-container {
+.timelineSliderContainer {
   position: relative;
-
-  //width: 100%;
-  height: 530px; /* или любую необходимую высоту */
+  height: 530px;
   margin: 0 auto;
 
   @media (max-width: 768px) {
@@ -22,8 +20,7 @@
   }
 }
 
-/* Обертка для круга */
-.circle-container {
+.circleContainer {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -49,7 +46,7 @@
   }
 }
 
-.timeline-circle {
+.timelineCircle {
   position: relative;
   width: 100%;
   height: 100%;
@@ -62,7 +59,7 @@
   }
 }
 
-.circle-point {
+.circlePoint {
   position: absolute;
   width: 10px;
   height: 10px;
@@ -70,7 +67,7 @@
   border-radius: 50%;
   cursor: pointer;
   transform: translate(-50%, -50%);
-  transition: all 0.3s ease-in-out; /* Добавляем плавный переход */
+  transition: all 0.3s ease-in-out;
   color: rgb(66, 86, 122);
 
   &::before {
@@ -96,7 +93,7 @@
   }
 }
 
-.active-point {
+.activePoint {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -112,7 +109,16 @@
   transition: all .2s ease-in-out;
 }
 
-.slider-title {
+.defaultPoint {
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+}
+
+.sliderTitle {
   position: absolute;
   top: -20%;
   left: 0;
@@ -163,14 +169,14 @@
   }
 }
 
-.navigation-buttons-wrapper {
+.navigationButtonsWrapper {
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 999;
   overflow-x: hidden;
 
-  .navigation-buttons {
+  .navigationButtons {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -187,6 +193,15 @@
       outline: none;
       transition: all .2s linear;
 
+      &.disabledButton {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        &:hover {
+          background: transparent;
+        }
+      }
+
       &:hover {
         background: white;
       }
@@ -201,7 +216,7 @@
       margin-bottom: 10px;
     }
 
-    .navigation-buttons {
+    .navigationButtons {
       gap: 10px;
 
       button {
@@ -217,13 +232,12 @@
   }
 }
 
-.active-years {
+.activeYears {
   position: absolute;
   display: flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  //z-index: 9;
 
   p {
     font-size: 200px;
@@ -231,12 +245,12 @@
     line-height: 160px;
   }
 
-  .left-number {
+  .leftNumber {
     transform: translateX(-10%);
     color: #5D5FEF;
   }
 
-  .right-number {
+  .rightNumber {
     transform: translateX(8%);
     color: #EF5DA8;
   }
@@ -247,11 +261,11 @@
       letter-spacing: 6px;
     }
 
-    .left-number {
+    .leftNumber {
       transform: translateX(-17%);
     }
 
-    .right-number {
+    .rightNumber {
       transform: translateX(18%);
     }
   }
@@ -266,7 +280,7 @@
       letter-spacing: initial;
     }
 
-    .left-number, .right-number {
+    .leftNumber, .rightNumber {
       margin: 0;
 
       transform: none;
@@ -287,14 +301,14 @@
   }
 }
 
-.circle-with-number {
+.circleWithNumber {
   position: relative;
   font-size: 20px;
   font-weight: 700;
   color: rgb(66, 86, 122);
   cursor: initial;
 
-  .circle-with-number-desc {
+  .circleWithNumberDesc {
     position: absolute;
     margin: 0;
     transform: translateX(100%);
@@ -314,66 +328,24 @@
 }
 
 
-.swiper-container {
+.swiperContainer {
   position: relative;
   width: 100%;
   margin-top: 30px;
   max-width: 1400px;
+  transform: translateY(30px);
 }
 
-.custom-prev-button,
-.custom-next-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: white;
-  border: 1px solid #42567A;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #F4F5F9;
-  }
-
-  &.swiper-button-disabled {
-    display: none;
-  }
-
-  svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  @media (max-width: 960px) {
-    display: none;
-  }
-}
-
-.custom-prev-button {
-  left: -5%;
-}
-
-.custom-next-button {
-  right: -5%;
-}
-
-.bottom-slider {
+.bottomSlider {
   margin-top: 56px;
   overflow: visible;
-  padding-bottom: 20px; // Для тени
+  padding-bottom: 20px;
 
-  .swiper-button-prev, .swiper-button-next {
+  .swiperButtonPrev, .swiperButtonNext {
     display: none;
   }
 
-  .bottom-slider-slide {
+  .bottomSliderSlide {
     box-sizing: border-box;
 
     border-radius: 8px;
@@ -388,7 +360,7 @@
       flex-direction: column;
     }
 
-    .bottom-slider-slide-title {
+    .bottomSliderSlideTitle {
       margin-top: 0;
       margin-bottom: 15px;
       color: rgb(56, 119, 238);
@@ -399,14 +371,14 @@
       text-transform: uppercase;
     }
 
-    .bottom-slider-slide-text {
+    .bottomSliderSlideText {
       color: rgb(66, 86, 122);
       font-size: 20px;
       font-weight: 400;
       line-height: 30px;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 4; // Количество видимых строк
+      -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       margin-bottom: 0;
       flex-grow: 1;
@@ -418,62 +390,54 @@
     padding-top: 20px;
     border-top: 1px solid #42567A;
 
-    .bottom-slider-slide {
-      .bottom-slider-slide-title {
+    .bottomSliderSlide {
+      .bottomSliderSlideTitle {
         margin-top: 0;
         font-size: 20px;
       }
 
-      .bottom-slider-slide-text {
+      .bottomSliderSlideText {
         font-size: 16px;
         line-height: 24px;
-        -webkit-line-clamp: 3; // Меньше строк на мобильных
+        -webkit-line-clamp: 3;
       }
     }
   }
 }
 
-/* Общие стили для линий */
-.center-line {
+.centerLine {
   position: absolute;
-  background-color: rgb(66, 86, 122); /* Полупрозрачный цвет, чтобы не сильно выделялся */
-  z-index: -1; /* Линии должны быть под остальными элементами */
+  background-color: rgb(66, 86, 122);
+  z-index: -1;
 
   @media (max-width: 960px) {
     display: none;
   }
 }
 
-/* Горизонтальная линия */
-.horizontal-line {
+.horizontalLine {
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
-  width: 100vw; /* На всю ширину экрана */
-  height: 1px; /* Толщина линии */
+  width: 100vw;
+  height: 1px;
 }
 
-/* Вертикальная линия */
-.vertical-line {
+.verticalLine {
   top: 50%;
   left: 50%;
   transform: translateY(-50%);
-  height: 200vh; /* На всю высоту экрана */
-  width: 1px; /* Толщина линии */
+  height: 200vh;
+  width: 1px;
 }
 
-/* Стили для пагинации */
-.slider-pagination {
-  //position: absolute;
+.sliderPagination {
   display: none;
-  //justify-content: center;
   gap: 6px;
   z-index: 9;
-
   transform: translate(calc(50% - 25px), -25px);
 
-
-  .pagination-dot {
+  .paginationDot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -498,13 +462,13 @@
   }
 }
 
-.pc-carousel {
+.pcСarousel {
   @media (max-width: 768px) {
     display: none;
   }
 }
 
-.mobile-carousel {
+.mobileCarousel {
   @media (min-width: 768px) {
     display: none;
   }

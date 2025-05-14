@@ -1,7 +1,9 @@
-import React, {useEffect, useRef} from 'react';
-import {Navigation} from "swiper/modules";
-import {Swiper, SwiperSlide} from "swiper/react";
 import gsap from "gsap";
+import {Navigation} from "swiper/modules";
+import React, {useEffect, useRef} from 'react';
+import {Swiper, SwiperSlide} from "swiper/react";
+
+import styles from "../../styles/Slider.module.scss"
 
 interface Props {
     isAnimating: boolean,
@@ -14,7 +16,7 @@ interface Props {
 }
 
 const BottomCarousel: React.FC<Props> = ({isAnimating, slides, width}) => {
-    const heightValue = width <= 768 ? "192.2px" : "190px";
+    const heightValue = width <= 768 ? "192.2px" : "216px";
 
     const swiperContainerRef = useRef<HTMLDivElement>(null);
 
@@ -42,33 +44,31 @@ const BottomCarousel: React.FC<Props> = ({isAnimating, slides, width}) => {
 
     return (
         <div
-            className="swiper-container"
+            className={styles.swiperContainer}
             ref={swiperContainerRef}
             style={{
-                transform: 'translateY(30px)',
                 visibility: isAnimating ? 'hidden' : 'visible',
-                position: 'relative',
                 height: isAnimating ? heightValue : 'auto',
                 pointerEvents: isAnimating ? 'none' : 'auto'
             }}
         >
             {!isAnimating && (
                 <>
-                    <div className="swiper-button-prev custom-prev-button">
+                    <div className={`${styles.swiperButtonPrev} custom-prev-button`}>
                         <img src={`${import.meta.env.BASE_URL}icons/left.svg`} alt="arrow-left"/>
                     </div>
-                    <div className="swiper-button-next custom-next-button">
+                    <div className={`${styles.swiperButtonNext} custom-next-button`}>
                         <img src={`${import.meta.env.BASE_URL}icons/right.svg`} alt="arrow-right"/>
                     </div>
 
 
                     {width <= 768 && (
-                        <p className="circle-with-number-desc mobile">Наука</p>
+                        <p className={styles.mobile}>Наука</p>
                     )}
 
                     <Swiper
                         spaceBetween={50}
-                        className="bottom-slider"
+                        className={styles.bottomSlider}
                         navigation={{
                             prevEl: '.custom-prev-button',
                             nextEl: '.custom-next-button',
@@ -94,10 +94,10 @@ const BottomCarousel: React.FC<Props> = ({isAnimating, slides, width}) => {
                         }}>
                         {slides.map(slide => (
                             <SwiperSlide
-                                className="bottom-slider-slide"
+                                className={styles.bottomSliderSlide}
                                 key={slide.id}>
-                                <p className="bottom-slider-slide-title">{slide.title}</p>
-                                <p className="bottom-slider-slide-text">{slide.text}</p>
+                                <p className={styles.bottomSliderSlideTitle}>{slide.title}</p>
+                                <p className={styles.bottomSliderSlideText}>{slide.text}</p>
                             </SwiperSlide>
                         ))}
                     </Swiper>
