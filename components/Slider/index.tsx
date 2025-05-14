@@ -1,7 +1,7 @@
 import 'swiper/css';
 import gsap from 'gsap';
 import BottomCarousel from "../BottomCarousel";
-import styles from  "../../styles/Slider.module.scss";
+import styles from "../../styles/Slider.module.scss";
 import React, {useRef, useState, useEffect} from 'react';
 import {slidesByOption} from "../../src/models/slides.ts";
 import {useWindowWidth} from "../../utils/useWindowWidth.ts";
@@ -20,9 +20,6 @@ const Slider: React.FC = () => {
 
     const points = [1, 2, 3, 4, 5, 6];
     const pointsCount = points.length;
-
-    // Угол для активной точки (справа сверху)
-    //const activeAngle = -60;
 
     // Вычисляем координаты точек на круге
     const radius = width <= 1440 ? 215 : 265;
@@ -109,25 +106,6 @@ const Slider: React.FC = () => {
         prevFirstYear.current = currentFirstYear;
         prevLastYear.current = currentLastYear;
     }, [firstYear, lastYear]);
-
-    // // Начальное положение круга, чтобы активная точка была справа сверху
-    // const getRotationForSlide = (slideIndex: number) => {
-    //     return activeAngle - (slideIndex * (360 / pointsCount));
-    // };
-
-    // Устанавливаем начальный поворот круга
-    // useEffect(() => {
-    //     if (circleRef.current) {
-    //         const initialRotation = getRotationForSlide(selectedSlideIndex);
-    //         gsap.set(circleRef.current, {rotation: initialRotation});
-    //
-    //         pointsRef.current.forEach((pointRef) => {
-    //             if (pointRef) {
-    //                 gsap.set(pointRef, {rotation: -initialRotation});
-    //             }
-    //         });
-    //     }
-    // }, []);
 
     // Функция для определения кратчайшего пути вращения
     const getShortestRotationPath = (from: number, to: number) => {
