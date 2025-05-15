@@ -1,4 +1,4 @@
-@import './_variables.scss';
+@use './_variables.scss' as *;
 
 .sliderWrapper {
   @media (max-width: 1440px) {
