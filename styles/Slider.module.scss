@@ -1,3 +1,5 @@
+@import './_variables.scss';
+
 .sliderWrapper {
   @media (max-width: 1440px) {
     padding-left: 40px;
@@ -52,7 +54,8 @@
   height: 100%;
   border-radius: 50%;
   box-sizing: border-box;
-  border: 1px solid rgb(66, 86, 122);
+  border: 1px solid $primary-dark;
+  opacity: 0.8;
 
   @media (max-width: 960px) {
     display: none;
@@ -68,7 +71,7 @@
   cursor: pointer;
   transform: translate(-50%, -50%);
   transition: all 0.3s ease-in-out;
-  color: rgb(66, 86, 122);
+  color: $primary-dark;
 
   &::before {
     content: '';
@@ -85,8 +88,8 @@
   &:hover {
     width: 56px;
     height: 56px;
-    background: rgb(244, 245, 249);
-    border: 1px solid rgba(48, 62, 88, 0.5);
+    background: $light-bg;
+    border: 1px solid $secondary-dark;
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
@@ -100,9 +103,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(48, 62, 88, 0.5);
-  background: rgb(244, 245, 249);
-  color: rgb(66, 86, 122);
+  border: 1px solid $secondary-dark;
+  background: $light-bg;
+  color: $primary-dark;
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;
@@ -131,11 +134,11 @@
     top: 50%;
     left: -40.1%;
     transform: rotate(90deg);
-    background: linear-gradient(to right, #3877EE, #EF5DA8);
+    background: linear-gradient(to right, $primary-blue, $primary-pink);
   }
 
   p {
-    color: rgb(66, 86, 122);
+    color: $primary-dark;
     font-family: "PT Sans";
     font-size: 56px;
     font-weight: 700;
@@ -189,7 +192,7 @@
       cursor: pointer;
       background: transparent;
       border-radius: 50%;
-      border: 1px solid #42567A;
+      border: 1px solid $primary-dark-transparent-05;
       outline: none;
       transition: all .2s linear;
 
@@ -212,10 +215,6 @@
     position: relative;
     width: 100%;
 
-    .amount {
-      margin-bottom: 10px;
-    }
-
     .navigationButtons {
       gap: 10px;
 
@@ -229,6 +228,17 @@
         }
       }
     }
+  }
+}
+
+.amount {
+  color: $primary-dark;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
   }
 }
 
@@ -247,12 +257,12 @@
 
   .leftNumber {
     transform: translateX(-10%);
-    color: #5D5FEF;
+    color: $primary-blue-light;
   }
 
   .rightNumber {
     transform: translateX(8%);
-    color: #EF5DA8;
+    color: $primary-pink;
   }
 
   @media (max-width: 1440px) {
@@ -305,7 +315,7 @@
   position: relative;
   font-size: 20px;
   font-weight: 700;
-  color: rgb(66, 86, 122);
+  color: $primary-dark;
   cursor: initial;
 
   .circleWithNumberDesc {
@@ -316,7 +326,7 @@
 }
 
 .mobile {
-  color: #42567A;
+  color: $primary-dark;
   font-size: 16px;
   font-weight: 700;
   line-height: 120%;
@@ -363,7 +373,7 @@
     .bottomSliderSlideTitle {
       margin-top: 0;
       margin-bottom: 15px;
-      color: rgb(56, 119, 238);
+      color: $primary-blue;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 25px;
       font-weight: 400;
@@ -372,7 +382,7 @@
     }
 
     .bottomSliderSlideText {
-      color: rgb(66, 86, 122);
+      color: $primary-dark;
       font-size: 20px;
       font-weight: 400;
       line-height: 30px;
@@ -388,7 +398,7 @@
   @media (max-width: 768px) {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #42567A;
+    border-top: 1px solid rgb(199, 205, 217);
 
     .bottomSliderSlide {
       .bottomSliderSlideTitle {
@@ -407,8 +417,9 @@
 
 .centerLine {
   position: absolute;
-  background-color: rgb(66, 86, 122);
+  background-color: $primary-dark;
   z-index: -1;
+  opacity: 0.1;
 
   @media (max-width: 960px) {
     display: none;
@@ -441,7 +452,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: rgba(66, 86, 122, 0.3);
+    background-color: $primary-dark-transparent-03;
     cursor: pointer;
     transition: all 0.3s ease;
 
@@ -452,7 +463,7 @@
     &.active {
       width: 8px;
       height: 8px;
-      background-color: #42567A;
+      background-color: $primary-dark;
     }
   }
 
