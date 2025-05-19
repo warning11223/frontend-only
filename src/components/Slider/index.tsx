@@ -1,15 +1,17 @@
 import 'swiper/css';
 import gsap from 'gsap';
 import BottomCarousel from "../BottomCarousel";
-import styles from "../../styles/Slider.module.scss";
+import styles from "../../../styles/Slider.module.scss";
 import React, {useRef, useState, useEffect} from 'react';
-import {slidesByOption} from "../../src/models/slides.ts";
-import {useWindowWidth} from "../../utils/useWindowWidth.ts";
+import {slidesByOption} from "../../models/slides.ts";
+import {useWindowWidth} from "../../../utils/useWindowWidth.ts";
+import {SliderCircle} from "../SliderCircle";
+import {NavigationButtons} from "../NavigationButtons";
+import {NavigationDots} from "../NavigationDots";
 
 const Slider: React.FC = () => {
     const circleRef = useRef<HTMLDivElement>(null);
     const pointsRef = useRef<(HTMLDivElement | null)[]>([]);
-    const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
 
     const width = useWindowWidth();
 
@@ -224,9 +226,6 @@ const Slider: React.FC = () => {
         rotateClockwise(1);
     };
 
-    // Массив ссылок на все точки
-    const pointRefs = useRef<(HTMLDivElement | null)[]>([]);
-
     return (
         <div className={styles.sliderWrapper}>
             <div className={styles.timelineSliderContainer}>
@@ -234,52 +233,18 @@ const Slider: React.FC = () => {
                     <p>Исторические <br/> даты</p>
                 </div>
 
-                <div className={styles.circleContainer}>
-                    <div className={styles.activeYears}>
-                        <p ref={leftNumberRef} className={styles.leftNumber}>{firstYear}</p>
-                        <p ref={rightNumberRef} className={styles.rightNumber}>{lastYear}</p>
-                    </div>
-
-                    <div
-                        ref={circleRef}
-                        className={styles.timelineCircle}
-                    >
-                        {pointsCoordinates.map((coords, index) => {
-                            const isActive = index === selectedSlideIndex;
-
-                            return (
-                                <div
-                                    key={index}
-                                    ref={el => {
-                                        pointsRef.current[index] = el;
-                                        pointRefs.current[index] = el;
-                                    }}
-                                    className={`${isActive ? styles.activePoint : styles.circlePoint} ${styles.defaultPoint}`}
-                                    style={{
-                                        left: coords.left,
-                                        top: coords.top,
-                                    }}
-                                    onClick={() => handlePointClick(index)}
-                                    onMouseEnter={() => setHoveredPoint(index)}
-                                    onMouseLeave={() => setHoveredPoint(null)}
-                                >
-                                    {(isActive || hoveredPoint === index) && (
-                                        <div
-                                            className={`${isActive ? styles.circleWithNumber : styles.circleWithNumberHover}`}>
-                                            {isActive && !isAnimating && (
-                                                <p className={styles.circleWithNumberDesc}>Наука</p>
-                                            )}
-                                            {index + 1}
-                                        </div>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    <div className={`${styles.centerLine} ${styles.horizontalLine}`}></div>
-                    <div className={`${styles.centerLine} ${styles.verticalLine}`}></div>
-                </div>
+                <SliderCircle
+                    circleRef={circleRef}
+                    pointsRef={pointsRef}
+                    pointsCoordinates={pointsCoordinates}
+                    handlePointClick={handlePointClick}
+                    rightNumberRef={rightNumberRef}
+                    leftNumberRef={leftNumberRef}
+                    selectedSlideIndex={selectedSlideIndex}
+                    firstYear={firstYear}
+                    lastYear={lastYear}
+                    isAnimating={isAnimating}
+                 />
 
                 <div className={styles.navigationButtonsWrapper}>
                     <div className={styles.mobileCarousel}>
@@ -293,30 +258,17 @@ const Slider: React.FC = () => {
                         {`0${selectedSlideIndex + 1}/06`}
                     </p>
 
-                    <div className={styles.navigationButtons}>
-                        <button
-                            onClick={handlePrev}
-                            className={selectedSlideIndex === 0 ? styles.disabledButton : ""}
-                        >
-                            <img src={`${import.meta.env.BASE_URL}icons/left.svg`} alt="arrow-left"/>
-                        </button>
-                        <button
-                            onClick={handleNext}
-                            className={selectedSlideIndex === 5 ? styles.disabledButton : ""}
-                        >
-                            <img src={`${import.meta.env.BASE_URL}icons/right.svg`} alt="arrow-right"/>
-                        </button>
-                    </div>
+                    <NavigationButtons
+                        selectedSlideIndex={selectedSlideIndex}
+                        handlePrev={handlePrev}
+                        handleNext={handleNext}
+                    />
 
-                    <div className={styles.sliderPagination}>
-                        {pointsCoordinates.map((_, index) => (
-                            <div
-                                key={index}
-                                className={`${styles.paginationDot} ${index === selectedSlideIndex ? styles.active : ''}`}
-                                onClick={() => handlePointClick(index)}
-                            />
-                        ))}
-                    </div>
+                    <NavigationDots
+                        pointsCoordinates={pointsCoordinates}
+                        selectedSlideIndex={selectedSlideIndex}
+                        handlePointClick={handlePointClick}
+                    />
                 </div>
             </div>
 

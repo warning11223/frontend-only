@@ -3,7 +3,7 @@ import {Navigation} from "swiper/modules";
 import React, {useEffect, useRef} from 'react';
 import {Swiper, SwiperSlide} from "swiper/react";
 
-import styles from "../../styles/Slider.module.scss"
+import styles from "../../../styles/Slider.module.scss"
 
 interface Props {
     isAnimating: boolean,
